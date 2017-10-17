@@ -13,8 +13,8 @@ var tips = require('./routes/tipsRoutes');
 var app = express();
 
 mongoose.Promise = global.Promise;
-
-mongoose.connect('mongodb://localhost/tippingdb')
+//mongodb://localhost/tippingdb
+mongoose.connect('mongodb://heroku_ztf3jpdz:jtj6ekss7kjv4ds27sirv0mmi@ds121945.mlab.com:21945/heroku_ztf3jpdz')
         .then(() =>  console.log('connection successful'))
         .catch((err) => console.error(err));
 
