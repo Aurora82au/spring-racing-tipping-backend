@@ -1,7 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var Punters = require('../models/puntersModel.js');
+const express = require('express');
+const router = express.Router();
+const Punters = require('../models/puntersModel.js');
 
 /* GET ALL PUNTERS */
 router.get('/', function(req, res, next) {
@@ -11,10 +10,9 @@ router.get('/', function(req, res, next) {
     });
 });
 
-/* GET A SINGLE PUNTER BY PUNTERID */
+/* GET A SINGLE PUNTER BY ID */
 router.get('/:punterid', function(req, res, next) {
-    var query = Punters.where({ "punterId": req.params.punterid });
-    query.findOne(function (err, punter) {
+    Punters.findById(req.params.punterid, function (err, punter) {
         if (err) return next(err);
         res.json(punter);
     });
@@ -30,8 +28,7 @@ router.post('/', function(req, res, next) {
 
 /* UPDATE A PUNTER */
 router.put('/:punterid', function(req, res, next) {
-    var query = Punters.where({ "punterId": req.params.punterid });
-    query.findOneAndUpdate(req.body, function (err, punter) {
+    Punters.findByIdAndUpdate(req.params.punterid, req.body, function (err, punter) {
         if (err) return next(err);
         res.json(punter);
     });
@@ -39,8 +36,7 @@ router.put('/:punterid', function(req, res, next) {
 
 /* DELETE A PUNTER */
 router.delete('/:punterid', function(req, res, next) {
-    var query = Punters.where({ "punterId": req.params.punterid });
-    query.findOneAndRemove(function (err, punter) {
+    Punters.findByIdAndDelete(req.params.punterid, function (err, punter) {
         if (err) return next(err);
         res.json(punter);
     });

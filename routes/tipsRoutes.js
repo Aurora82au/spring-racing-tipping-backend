@@ -1,7 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var Tips = require('../models/tipsModel.js');
+const express = require('express');
+const router = express.Router();
+const Tips = require('../models/tipsModel.js');
 
 /* GET ALL TIPS */
 router.get('/', function(req, res, next) {
@@ -11,16 +10,23 @@ router.get('/', function(req, res, next) {
     });
 });
 
-/* GET A SINGLE GROUP OF TIPS BY MEETID */
-router.get('/:meetid', function(req, res, next) {
-    var query = Tips.where({ "meetId": req.params.meetid });
-    query.findOne(function (err, tips) {
+/* GET ALL TIPS IN A COMPETITION */
+router.get('/bycompetition/:competitionId', function(req, res, next) {
+    Tips.find({ competitionId: req.params.competitionId }, function (err, tips) {
         if (err) return next(err);
         res.json(tips);
     });
 });
 
-/* SAVE A NEW GROUP OF TIPS */
+/* GET A SINGLE SET OF TIPS BY ID */
+router.get('/:tipsid', function(req, res, next) {
+    Tips.findById(req.params.tipsid, function (err, tips) {
+        if (err) return next(err);
+        res.json(tips);
+    });
+});
+
+/* SAVE A NEW SET OF TIPS */
 router.post('/', function(req, res, next) {
     Tips.create(req.body, function (err, tips) {
         if (err) return next(err);
@@ -28,19 +34,17 @@ router.post('/', function(req, res, next) {
     });
 });
 
-/* UPDATE A GROUP OF TIPS */
-router.put('/:meetid', function(req, res, next) {
-    var query = Tips.where({ "meetId": req.params.meetid });
-    query.findOneAndUpdate(req.body, function (err, tips) {
+/* UPDATE A SET OF TIPS */
+router.put('/:tipsid', function(req, res, next) {
+    Tips.findByIdAndUpdate(req.params.tipsid, req.body, function (err, tips) {
         if (err) return next(err);
         res.json(tips);
     });
 });
 
-/* DELETE A GROUP OF TIPS */
-router.delete('/:meetid', function(req, res, next) {
-    var query = Tips.where({ "meetId": req.params.meetid });
-    query.findOneAndRemove(function (err, tips) {
+/* DELETE A SET OF TIPS */
+router.delete('/:tipsid', function(req, res, next) {
+    Tips.findByIdAndDelete(req.params.tipsid, function (err, tips) {
         if (err) return next(err);
         res.json(tips);
     });

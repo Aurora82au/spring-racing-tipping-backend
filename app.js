@@ -1,20 +1,23 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
-var racemeets = require('./routes/racemeetsRoutes');
-var punters = require('./routes/puntersRoutes');
-var tips = require('./routes/tipsRoutes');
+const competitions = require('./routes/competitionsRoutes');
+const meets = require('./routes/meetsRoutes');
+const races = require('./routes/racesRoutes');
+const tips = require('./routes/tipsRoutes');
+const punters = require('./routes/puntersRoutes');
 
-var app = express();
+let app = express();
+
+// const database = 'mongodb://heroku_ztf3jpdz:jtj6ekss7kjv4ds27sirv0mmi@ds121945.mlab.com:21945/heroku_ztf3jpdz'; // Production
+const database = 'mongodb://127.0.0.1:3001/tippingDB'; // Local
 
 mongoose.Promise = global.Promise;
-//mongodb://localhost/tippingdb
-mongoose.connect('mongodb://heroku_ztf3jpdz:jtj6ekss7kjv4ds27sirv0mmi@ds121945.mlab.com:21945/heroku_ztf3jpdz')
+mongoose.connect(database, { useNewUrlParser: true })
         .then(() =>  console.log('connection successful'))
         .catch((err) => console.error(err));
 
@@ -30,21 +33,21 @@ app.use(function(req, res, next) {
     next();
 });
 
-// Uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/racemeets', racemeets);
+app.use('/competitions', competitions);
+app.use('/meets', meets);
+app.use('/races', races);
 app.use('/punters', punters);
 app.use('/tips', tips);
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
+    let err = new Error('Not Found');
     err.status = 404;
     next(err);
 });

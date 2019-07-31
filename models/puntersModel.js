@@ -1,16 +1,15 @@
-var mongoose = require('mongoose'),
-Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var PuntersSchema = new Schema({
-punterId: Number,
-password: String,
-name: {
-    first: String,
-    last: String,
-    display: String
-},
-pic: String,
-isAdmin: Boolean
+const PuntersSchema = new Schema({
+    _id: Number,
+    password: String,
+    name: {
+        first: String,
+        last: String,
+        display: String
+    },
+    image: String
 });
 
 module.exports = mongoose.model('Punters', PuntersSchema);
