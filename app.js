@@ -13,8 +13,9 @@ const punters = require('./routes/puntersRoutes');
 
 let app = express();
 
-// const database = 'mongodb://heroku_ztf3jpdz:jtj6ekss7kjv4ds27sirv0mmi@ds121945.mlab.com:21945/heroku_ztf3jpdz'; // Production
-const database = 'mongodb://127.0.0.1:3001/tippingDB'; // Local
+// const database = 'mongodb://heroku_ztf3jpdz:jtj6ekss7kjv4ds27sirv0mmi@ds121945.mlab.com:21945/heroku_ztf3jpdz'; // Production v1 - sleepy-harbor-88560
+const database = 'mongodb://heroku_klkx53f2:sr327j3aif5efreeh17kedr4p7@ds229088.mlab.com:29088/heroku_klkx53f2'; // Production v2 - spring-racing-tipping-88560
+// const database = 'mongodb://127.0.0.1:3001/tippingDB'; // Local
 
 mongoose.Promise = global.Promise;
 mongoose.connect(database, { useNewUrlParser: true })
