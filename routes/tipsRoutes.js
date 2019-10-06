@@ -36,7 +36,7 @@ router.post('/', function(req, res, next) {
 
 /* UPDATE A SET OF TIPS */
 router.put('/:tipsid', function(req, res, next) {
-    Tips.findByIdAndUpdate(req.params.tipsid, req.body, function (err, tips) {
+    Tips.findByIdAndUpdate(req.params.tipsid, {selections: req.body.selections}, {new: true}, function (err, tips) {
         if (err) return next(err);
         res.json(tips);
     });

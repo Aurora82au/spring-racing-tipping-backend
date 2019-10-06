@@ -6,6 +6,7 @@ const CompetitionsSchema = new Schema({
     name: String,
     startDate: String,
     admins: [Number],
+    gameAccounts: [Number],
     punters: [Number]
 });
 

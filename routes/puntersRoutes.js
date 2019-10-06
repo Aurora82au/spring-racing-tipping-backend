@@ -28,7 +28,11 @@ router.post('/', function(req, res, next) {
 
 /* UPDATE A PUNTER */
 router.put('/:punterid', function(req, res, next) {
-    Punters.findByIdAndUpdate(req.params.punterid, req.body, function (err, punter) {
+    let updates = {};
+    if (req.body.name) { updates.name = req.body.name }
+    if (req.body.password) { updates.password = req.body.password }
+    if (req.body.image) { updates.image = req.body.image }
+    Punters.findByIdAndUpdate(req.params.punterid, updates, {new: true}, function (err, punter) {
         if (err) return next(err);
         res.json(punter);
     });

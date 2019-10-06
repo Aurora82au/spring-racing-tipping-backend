@@ -36,7 +36,13 @@ router.post('/', function(req, res, next) {
 
 /* UPDATE A COMPETITION */
 router.put('/:competitionid', function(req, res, next) {
-    Competitions.findByIdAndUpdate(req.params.competitionid, req.body, function (err, competition) {
+    let updates = {};
+    if (req.body.name) { updates.name = req.body.name }
+    if (req.body.startDate) { updates.startDate = req.body.startDate }
+    if (req.body.punters) { updates.punters = req.body.punters }
+    if (req.body.gameAccounts) { updates.gameAccounts = req.body.gameAccounts }
+    if (req.body.admins) { updates.admins = req.body.admins }
+    Competitions.findByIdAndUpdate(req.params.competitionid, updates, {new: true}, function (err, competition) {
         if (err) return next(err);
         res.json(competition);
     });

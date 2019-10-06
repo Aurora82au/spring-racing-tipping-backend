@@ -36,7 +36,7 @@ router.post('/', function(req, res, next) {
 
 /* UPDATE A RACE */
 router.put('/:raceid', function(req, res, next) {
-    Races.findByIdAndUpdate(req.params.raceid, req.body, function (err, race) {
+    Races.findByIdAndUpdate(req.params.raceid, req.body, {new: true}, function (err, race) {
         if (err) return next(err);
         res.json(race);
     });
