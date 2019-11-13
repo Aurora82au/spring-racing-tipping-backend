@@ -18,7 +18,7 @@ const database = 'mongodb://heroku_klkx53f2:sr327j3aif5efreeh17kedr4p7@ds229088.
 // const database = 'mongodb://127.0.0.1:3001/tippingDB'; // Local
 
 mongoose.Promise = global.Promise;
-mongoose.connect(database, { useNewUrlParser: true })
+mongoose.connect(database, { useNewUrlParser: true, useUnifiedTopology: true })
         .then(() =>  console.log('connection successful'))
         .catch((err) => console.error(err));
 
