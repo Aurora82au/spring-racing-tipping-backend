@@ -4,7 +4,7 @@ const Competitions = require('../models/competitionsModel.js');
 
 /* GET ALL COMPETITIONS */
 router.get('/', function(req, res, next) {
-    Competitions.find(function (err, competitions) {
+    Competitions.find().sort({ name: 1 }).exec(function (err, competitions) {
         if (err) return next(err);
         res.json(competitions);
     });
@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 /* GET ALL COMPETITIONS A PUNTER BELONGS TO */
 router.get('/bypunter/:punterid', function(req, res, next) {
-    Competitions.find({ punters: req.params.punterid }, function (err, competition) {
+    Competitions.find({ punters: req.params.punterid }).sort({ name: 1 }).exec(function (err, competition) {
         if (err) return next(err);
         res.json(competition);
     });
