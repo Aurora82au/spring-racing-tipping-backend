@@ -16,7 +16,7 @@ let app = express();
 // const database = 'mongodb://heroku_ztf3jpdz:jtj6ekss7kjv4ds27sirv0mmi@ds121945.mlab.com:21945/heroku_ztf3jpdz'; // Production v1 - sleepy-harbor-88560 (mLab)
 // const database = 'mongodb://heroku_klkx53f2:sr327j3aif5efreeh17kedr4p7@ds229088.mlab.com:29088/heroku_klkx53f2'; // Production v2 - spring-racing-tipping-88560 (mLab)
 // const database = 'mongodb+srv://heroku_klkx53f2:BGeqoO5k1M90DI5O@tippingcluster.agkgv.mongodb.net/heroku_klkx53f2?retryWrites=true&w=majority'; // Production v3 - spring-racing-tipping-88560 (Atlas)
-const database = process.env.MONGODB_URI; // Set in 'Settings/Config Vars' in Heroku.
+const database = process.env.MONGODB_URI; // Set in 'Settings/Config Vars' in Heroku
 // const database = 'mongodb://127.0.0.1:3001/tippingDB'; // Local
 
 mongoose.Promise = global.Promise;
