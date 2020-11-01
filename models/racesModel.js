@@ -10,9 +10,9 @@ const RacesSchema = new Schema({
     distance: String,
     status: Number,
     placings: {
-        first: Number,
-        second: Number,
-        third: Number
+        first: Schema.Types.Mixed,
+        second: Schema.Types.Mixed,
+        third: Schema.Types.Mixed
     },
     scratchings: [Number],
     competitionId: Number
