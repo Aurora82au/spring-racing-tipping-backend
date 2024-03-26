@@ -4,6 +4,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const competitions = require('./routes/competitionsRoutes');
 const meets = require('./routes/meetsRoutes');
